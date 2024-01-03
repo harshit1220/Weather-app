@@ -6,7 +6,7 @@ let temprature = document.getElementById("temp");
 let ct = document.getElementById("city");
 let humidity = document.getElementById("humidity-info");
 let windInfo = document.getElementById("wind-info");
-let weatherImage = document.getElementById(".weather_img");
+let weatherImage = document.querySelector(".weather_img");
 
 async function getWeatherData() {
     if ((userCity.value = "")) {
@@ -14,7 +14,7 @@ async function getWeatherData() {
     } else {
         city = userCity.value;
         let response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
         );
         let data = await response.json();
         ct.innerHTML = data.name;
@@ -24,6 +24,9 @@ async function getWeatherData() {
         userCity.value = "";
         if (data.weather[0].main == "Clear") {
             weatherImage.src = "clear.png";
+        }
+        else if (data.weather[0].main == "Drizzle") {
+            weatherImage.src = "drizzle.png";
         }
     }
 }
